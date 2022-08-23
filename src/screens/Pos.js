@@ -67,7 +67,7 @@ class Pos extends Component {
     products.forEach(item => {
       totalQuantity += item.quantity;
     });
-    // if (totalQuantity != 0) {
+    // if (totalQuantity === 0) {
     //   this.setState({
     //     buttonDisable: false,
     //   });
@@ -106,7 +106,12 @@ class Pos extends Component {
         </View>
 
         {/* List Product */}
-        <View style={{height: '60%', marginTop: 15}}>
+        <View
+          style={{
+            height: '63%',
+            marginTop: 15,
+            paddingHorizontal: 10,
+          }}>
           <FlatList
             showsVerticalScrollIndicator={false}
             data={products}
@@ -123,7 +128,6 @@ class Pos extends Component {
         </View>
 
         {/* Button Checkout */}
-
         <View
           style={{
             flex: 1,
@@ -135,7 +139,7 @@ class Pos extends Component {
               width: '92%',
               height: 55,
               borderRadius: 10,
-              marginBottom: 10,
+              marginBottom: 35,
               backgroundColor: '#121212',
             }}>
             <TouchableOpacity onPress={this.onSave}>
