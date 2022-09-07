@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
     case 'SET_PRODUCT':
       return {
         ...state,
-        pmnetwork: action.payload,
+        product: action.payload,
       };
     default:
       return state;

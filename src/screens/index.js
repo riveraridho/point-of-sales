@@ -4,6 +4,7 @@ import Pos from './Pos';
 import PaymentPos from './pos/PaymentPos';
 import CreateCustomer from './customers/CreateCustomer';
 import ListCustomer from './customers/ListCustomer';
+import CreateProduct from './products/CreateProduct';
 import ListProduct from './products/ListProduct';
 import Setting from './Setting';
 
@@ -14,6 +15,7 @@ export {
   PaymentPos,
   CreateCustomer,
   ListCustomer,
+  CreateProduct,
   ListProduct,
   Setting,
 };

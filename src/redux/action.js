@@ -8,7 +8,7 @@ export function loadPos(pos) {
 }
 
 export function setPos(pos) {
-  console.log("pos:", pos)
+  console.log('pos:', pos);
   return {
     type: SET_POS,
     payload: pos,

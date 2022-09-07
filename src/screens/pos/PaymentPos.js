@@ -32,6 +32,13 @@ class PaymentPos extends Component {
   render() {
     const {navigation} = this.props;
     const data = this.props.pos;
+    const price = data
+      .filter(val => val.quantity)
+      .map(index => {
+        return index.itemPrice;
+      });
+    const reducer = (accumulator, curr) => accumulator + curr;
+    console.log(price.reduce(reducer));
     return (
       <View style={{flex: 1, backgroundColor: '#F1F1F1'}}>
         {/* Top Component/ScreenName */}
@@ -146,7 +153,7 @@ class PaymentPos extends Component {
                   color: 'black',
                   fontWeight: 'bold',
                 }}>
-                $9999
+                {price.reduce(reducer)}
               </Text>
               <Text>(Total includes tax)</Text>
             </View>
@@ -172,8 +179,9 @@ class PaymentPos extends Component {
               this.setState({paymentMeth: itemValue});
             }}>
             <Picker.Item label="Select Payment Method" value="" />
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
+            <Picker.Item label="Cash" value="cash" />
+            <Picker.Item label="Debit" value="debit" />
+            <Picker.Item label="E-Wallet" value="ewallet" />
           </Picker>
 
           {/* Chekcout Button */}

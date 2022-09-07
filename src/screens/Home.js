@@ -32,9 +32,11 @@ class Home extends Component {
           <View>
             <TouchableOpacity onPress={() => navigation.navigate('POS')}>
               <Card style={styles.card}>
-                <Card.Content>
-                  <Title style={styles.paragraph}>POS</Title>
-                </Card.Content>
+                <MaterialCommunityIcon
+                  name="cart-variant"
+                  size={75}
+                  color="#000000"
+                />
               </Card>
               <Text>POS</Text>
             </TouchableOpacity>
@@ -43,33 +45,45 @@ class Home extends Component {
         <View style={styles.container}>
           <TouchableOpacity onPress={() => navigation.navigate('List Product')}>
             <Card style={styles.card}>
-              <Card.Content>
-                <Title style={styles.paragraph}>Products</Title>
-              </Card.Content>
+              <MaterialCommunityIcon
+                name="package-variant-closed"
+                size={75}
+                color="#000000"
+              />
             </Card>
+            <Text>Products</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('ListCustomer')}>
             <Card style={styles.card}>
-              <Card.Content>
-                <Title style={styles.paragraph}>Customers</Title>
-              </Card.Content>
+              <MaterialCommunityIcon
+                name="account-multiple"
+                size={75}
+                color="#000000"
+              />
             </Card>
+            <Text>Customers</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.container}>
           <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
             <Card style={styles.card}>
-              <Card.Content>
-                <Title style={styles.paragraph}>Settings</Title>
-              </Card.Content>
+              <MaterialCommunityIcon
+                name="cog-outline"
+                size={75}
+                color="#000000"
+              />
             </Card>
+            <Text>Setting</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Card style={styles.card}>
-              <Card.Content>
-                <Title style={styles.paragraph}>Report</Title>
-              </Card.Content>
+              <MaterialCommunityIcon
+                name="chart-line"
+                size={75}
+                color="#000000"
+              />
             </Card>
+            <Text>Report</Text>
           </TouchableOpacity>
         </View>
       </View>

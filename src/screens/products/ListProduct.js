@@ -139,7 +139,7 @@ class ListProduct extends Component {
             backgroundColor: '#121212',
             borderRadius: 100,
           }}
-          onPress={() => navigation.navigate('CreateCustomer')}>
+          onPress={() => navigation.navigate('CreateProduct')}>
           <Icon name="plus" size={30} color="white" />
         </TouchableOpacity>
 

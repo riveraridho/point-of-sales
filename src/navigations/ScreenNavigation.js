@@ -17,6 +17,7 @@ import {
   PaymentPos,
   CreateCustomer,
   ListCustomer,
+  CreateProduct,
   ListProduct,
   Setting,
 } from '../screens';
@@ -60,7 +61,7 @@ const ScreenNavigation = () => {
               title: 'List Customer',
               headerTitleAlign: 'center',
               headerStyle: {
-                backgroundColor: '#48CFAD',
+                backgroundColor: '#F1F1F1',
                 height: 100,
                 shadowOffset: {
                   width: 0,
@@ -73,6 +74,7 @@ const ScreenNavigation = () => {
               },
             })}
           />
+          <Stack.Screen name="CreateProduct" component={CreateProduct} />
           <Stack.Screen
             name="List Product"
             component={ListProduct}
