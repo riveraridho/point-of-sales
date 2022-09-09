@@ -74,7 +74,16 @@ const ScreenNavigation = () => {
               },
             })}
           />
-          <Stack.Screen name="CreateProduct" component={CreateProduct} />
+          <Stack.Screen
+            name="CreateProduct"
+            component={CreateProduct}
+            options={() => ({
+              title: ' ',
+              headerStyle: {
+                backgroundColor: '#F1F1F1',
+              },
+            })}
+          />
           <Stack.Screen
             name="List Product"
             component={ListProduct}

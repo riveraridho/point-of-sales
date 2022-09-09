@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {
   View,
   ScrollView,
-  Image,
+  TextInput,
+  Text,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
@@ -11,7 +12,6 @@ import {
   Title,
   Paragraph,
   List,
-  TextInput,
   Provider as PaperProvider,
 } from 'react-native-paper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -23,7 +23,6 @@ class CreateProduct extends Component {
     super(props);
     this.state = {
       firstname: '',
-      lastname: '',
       street: '',
       city: '',
       province: '',
@@ -41,109 +40,105 @@ class CreateProduct extends Component {
   render() {
     return (
       <View style={{flex: 1, backgroundColor: '#F1F1F1'}}>
+        <View style={{alignItems: 'center'}}>
+          <View
+            style={{
+              flexDirection: 'column',
+              width: '96%',
+              borderBottomColor: 'black',
+              borderBottomWidth: 2,
+              justifyContent: 'space-between',
+            }}>
+            <Title
+              style={{
+                fontSize: 28,
+                fontWeight: 'bold',
+                textAlign: 'left',
+              }}>
+              {this.props.route.name}
+            </Title>
+          </View>
+        </View>
         <KeyboardAwareScrollView>
+          <TouchableOpacity
+            style={{
+              height: 300,
+              width: '100%',
+              backgroundColor: '#ED760E',
+              marginTop: 10,
+            }}>
+            <Text>Picture Only</Text>
+          </TouchableOpacity>
           <TextInput
-            label="First Name"
+            placeholder="Product Name"
             value={this.state.firstname}
             mode="outlined"
-            style={styles.input}
+            style={{
+              textAlign: 'center',
+              fontSize: 20,
+              fontWeight: 'bold',
+              height: 55,
+              marginHorizontal: 10,
+              borderBottomWidth: 1,
+              backgroundColor: '#F1F1F1',
+            }}
             onChange={event => {
               this.setState({
                 firstname: event.nativeEvent.text,
               });
             }}
           />
-          <TextInput
-            label="Last Name"
-            value={this.state.lastname}
-            mode="outlined"
-            style={styles.input}
-            onChange={event => {
-              this.setState({
-                lastname: event.nativeEvent.text,
-              });
-            }}
-          />
-          <TextInput
-            label="Street Name"
-            value={this.state.street}
-            mode="outlined"
-            style={styles.input}
-            onChange={event => {
-              this.setState({
-                street: event.nativeEvent.text,
-              });
-            }}
-          />
-          <TextInput
-            label="District"
-            value={this.state.province}
-            mode="outlined"
-            style={styles.input}
-            onChange={event => {
-              this.setState({
-                province: event.nativeEvent.text,
-              });
-            }}
-          />
-          <TextInput
-            label="City"
-            value={this.state.city}
-            mode="outlined"
-            style={styles.input}
-            onChange={event => {
-              this.setState({
-                city: event.nativeEvent.text,
-              });
-            }}
-          />
-          <TextInput
-            label="Zipcode"
-            value={this.state.zipcode}
-            mode="outlined"
-            style={styles.input}
-            keyboardType="phone-pad"
-            onChange={event => {
-              this.setState({
-                zipcode: event.nativeEvent.text,
-              });
-            }}
-          />
-          <TextInput
-            label="Telfon Number"
-            value={this.state.telfonnumber}
-            mode="outlined"
-            style={styles.input}
-            keyboardType="phone-pad"
-            onChange={event => {
-              this.setState({
-                telfonnumber: event.nativeEvent.text,
-              });
-            }}
-          />
-          <View style={styles.bottomCenter}>
-            <TouchableOpacity onPress={this.onSave}>
-              <Card
-                style={{
-                  alignItems: 'center',
-                  width: 300,
-                  height: 65,
-                  borderRadius: 15,
-                  backgroundColor: '#00C851',
-                }}>
-                <Card.Content>
-                  <Title
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      color: 'white',
-                      textAlign: 'center',
-                    }}>
-                    Create new customer
-                  </Title>
-                </Card.Content>
-              </Card>
-            </TouchableOpacity>
+          <View style={styles.container}>
+            <TextInput
+              placeholder="Stock"
+              value={this.state.street}
+              style={styles.input}
+              onChange={event => {
+                this.setState({
+                  street: event.nativeEvent.text,
+                });
+              }}
+            />
+            <TextInput
+              placeholder="Price"
+              value={this.state.province}
+              style={styles.input}
+              onChange={event => {
+                this.setState({
+                  province: event.nativeEvent.text,
+                });
+              }}
+            />
+          </View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'flex-end',
+            }}>
+            <View style={styles.bottomCenter}>
+              <TouchableOpacity onPress={this.onSave}>
+                <Card
+                  style={{
+                    alignItems: 'center',
+                    width: 300,
+                    height: 65,
+                    borderRadius: 15,
+                    backgroundColor: '#00C851',
+                  }}>
+                  <Card.Content>
+                    <Title
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 'bold',
+                        color: 'white',
+                        textAlign: 'center',
+                      }}>
+                      Create new customer
+                    </Title>
+                  </Card.Content>
+                </Card>
+              </TouchableOpacity>
+            </View>
           </View>
         </KeyboardAwareScrollView>
       </View>
@@ -176,18 +171,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    borderRadius: 10,
-    margin: 10,
-    flex: 1,
-    paddingHorizontal: 5,
-    padding: 2,
-    marginTop: 30,
-    minHeight: 300,
   },
   input: {
     marginHorizontal: 10,
+    textAlign: 'center',
+    fontSize: 20,
     marginTop: 15,
-    backgroundColor: '#FFFFFF',
+    height: 50,
+    width: '45%',
+    padding: 10,
+    borderBottomWidth: 1,
+    backgroundColor: '#F1F1F1',
   },
   bottomCenter: {
     flexDirection: 'row',
