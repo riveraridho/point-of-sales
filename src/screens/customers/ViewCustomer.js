@@ -15,10 +15,9 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {connect} from 'react-redux';
-import {setCustomer} from '../../redux/action';
+import TitleNavEdit from '../../components/TitleNavEdit';
 
-class CreateCustomer extends Component {
+class ViewCustomer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,6 +40,7 @@ class CreateCustomer extends Component {
   render() {
     return (
       <View style={{flex: 1, backgroundColor: '#F1F1F1'}}>
+        <TitleNavEdit title={this.props.route.name} />
         <KeyboardAwareScrollView>
           <TextInput
             label="Full Name"
@@ -110,49 +110,13 @@ class CreateCustomer extends Component {
               });
             }}
           />
-          <View style={styles.bottomCenter}>
-            <TouchableOpacity onPress={this.onSave}>
-              <Card
-                style={{
-                  alignItems: 'center',
-                  width: 300,
-                  height: 65,
-                  borderRadius: 15,
-                  backgroundColor: '#00C851',
-                }}>
-                <Card.Content>
-                  <Title
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      color: 'white',
-                      textAlign: 'center',
-                    }}>
-                    Create new customer
-                  </Title>
-                </Card.Content>
-              </Card>
-            </TouchableOpacity>
-          </View>
         </KeyboardAwareScrollView>
       </View>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    customer: state.customer,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchsetCustomer: customer => dispatch(setCustomer(customer)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateCustomer);
+export default ViewCustomer;
 
 const styles = StyleSheet.create({
   paragraph: {

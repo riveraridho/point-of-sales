@@ -11,7 +11,7 @@ import {
 } from 'react-native-paper';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import TitleNavSum from '../../components/TitleNavSum';
 class ListCustomer extends Component {
   constructor(props) {
     super(props);
@@ -22,10 +22,12 @@ class ListCustomer extends Component {
 
   async componentDidMount() {
     await axios
-      .get('http://10.0.2.2:3000/customers')
+      .get(
+        'https://my-json-server.typicode.com/riveraridho/dummy-api/users?_limit=10',
+      )
       .then(response => {
         this.setState({customer: response.data});
-        console.log(response.data);
+        console.log('response :', response.data);
       })
       .catch(function (error) {
         // handle error
@@ -39,7 +41,11 @@ class ListCustomer extends Component {
     console.log('isi:' + this.state.customer);
     return (
       <View style={{flex: 1, backgroundColor: '#F1F1F1'}}>
-        <ScrollView contentContainerStyle={{flex: 1}}>
+        <TitleNavSum
+          title={this.props.route.name}
+          total={data.filter(index => index.id).length}
+        />
+        <ScrollView showsVerticalScrollIndicator={false} Style={{flex: 1}}>
           <View
             style={{
               flex: 1,
@@ -54,6 +60,11 @@ class ListCustomer extends Component {
                     backgroundColor: '#F1F1F1',
                     justifyContent: 'center',
                     flexDirection: 'column',
+                  }}
+                  onPress={() => {
+                    this.props.navigation.navigate('ViewCustomer', {
+                      id: item.id,
+                    });
                   }}>
                   <View
                     style={{
@@ -61,33 +72,49 @@ class ListCustomer extends Component {
                       borderBottomWidth: 1,
                       paddingHorizontal: 10,
                     }}>
-                    <Text style={{color: 'black', fontSize: 18}}>
-                      {item.FirstName}
+                    <Text
+                      style={{
+                        marginBottom: 5,
+                        color: 'black',
+                        fontSize: 18,
+                        fontWeight: 'bold',
+                      }}>
+                      {item.name}
                     </Text>
-                    <Text style={{color: 'black', fontSize: 18}}>
-                      {item.Street} {item.City}
-                    </Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        marginBottom: 5,
+                      }}>
+                      <Text style={{color: 'black', fontSize: 18}}>
+                        {item.city}
+                      </Text>
+                      <Text style={{color: 'black', fontSize: 18}}>
+                        {item.zipcode}
+                      </Text>
+                    </View>
                   </View>
                 </TouchableOpacity>
               );
             })}
           </View>
-          <TouchableOpacity
-            style={{
-              width: 70,
-              height: 70,
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'absolute',
-              bottom: 20,
-              right: 10,
-              backgroundColor: '#0D47A1',
-              borderRadius: 100,
-            }}
-            onPress={() => navigation.navigate('CreateCustomer')}>
-            <Icon name="plus" size={30} color="white" />
-          </TouchableOpacity>
         </ScrollView>
+        <TouchableOpacity
+          style={{
+            width: 70,
+            height: 70,
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            bottom: 20,
+            right: 10,
+            backgroundColor: '#0D47A1',
+            borderRadius: 100,
+          }}
+          onPress={() => navigation.navigate('CreateCustomer')}>
+          <Icon name="plus" size={30} color="white" />
+        </TouchableOpacity>
       </View>
     );
   }

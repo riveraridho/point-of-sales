@@ -18,7 +18,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {connect} from 'react-redux';
 import {setCustomer} from '../../redux/action';
 
-class CreateCustomer extends Component {
+class EditCustomer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -152,7 +152,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateCustomer);
+export default connect(mapStateToProps, mapDispatchToProps)(EditCustomer);
 
 const styles = StyleSheet.create({
   paragraph: {

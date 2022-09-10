@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Title, Provider as PaperProvider} from 'react-native-paper';
 
-const TitleNavigation = ({title, total}) => {
+const TitleNavSum = ({title, total}) => {
   return (
     <View style={{alignItems: 'center'}}>
       <View
@@ -42,24 +42,13 @@ const TitleNavigation = ({title, total}) => {
                 color: 'black',
                 fontSize: 18,
               }}>
-              items
+              Customers
             </Text>
           </View>
-
-          <TouchableOpacity>
-            <Text
-              style={{
-                color: 'black',
-                textDecorationLine: 'underline',
-                fontSize: 18,
-              }}>
-              Edit
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
 };
 
-export default TitleNavigation;
+export default TitleNavSum;

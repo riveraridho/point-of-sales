@@ -16,7 +16,9 @@ import {
   Pos,
   PaymentPos,
   CreateCustomer,
+  EditCustomer,
   ListCustomer,
+  ViewCustomer,
   CreateProduct,
   ListProduct,
   Setting,
@@ -54,23 +56,24 @@ const ScreenNavigation = () => {
             })}
           />
           <Stack.Screen name="CreateCustomer" component={CreateCustomer} />
+          <Stack.Screen name="EditCustomer" component={EditCustomer} />
           <Stack.Screen
             name="ListCustomer"
             component={ListCustomer}
             options={() => ({
-              title: 'List Customer',
-              headerTitleAlign: 'center',
+              title: ' ',
               headerStyle: {
                 backgroundColor: '#F1F1F1',
-                height: 100,
-                shadowOffset: {
-                  width: 0,
-                  height: 3,
-                },
-                shadowColor: 'black',
-                shadowOpacity: 1,
-                shadowRadius: 3.84,
-                elevation: 15,
+              },
+            })}
+          />
+          <Stack.Screen
+            name="ViewCustomer"
+            component={ViewCustomer}
+            options={() => ({
+              title: ' ',
+              headerStyle: {
+                backgroundColor: '#F1F1F1',
               },
             })}
           />
