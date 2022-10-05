@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Title, Provider as PaperProvider} from 'react-native-paper';
 
-const TitleNavEdit = ({title, total}) => {
+const TitleNavEdit = ({title, total, onPress}) => {
   return (
     <View style={{alignItems: 'center'}}>
       <View
@@ -21,7 +21,7 @@ const TitleNavEdit = ({title, total}) => {
           }}>
           {title}
         </Title>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
           <Text
             style={{
               marginTop: 8,

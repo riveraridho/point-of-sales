@@ -22,9 +22,7 @@ class ListCustomer extends Component {
 
   async componentDidMount() {
     await axios
-      .get(
-        'https://my-json-server.typicode.com/riveraridho/dummy-api/users?_limit=10',
-      )
+      .get('http://localhost:3000/users')
       .then(response => {
         this.setState({customer: response.data});
         console.log('response :', response.data);
@@ -33,12 +31,28 @@ class ListCustomer extends Component {
         // handle error
         console.log('error: ' + error);
       });
+    this._unsubscribe = this.props.navigation.addListener('focus', async () => {
+      await axios
+        .get('http://localhost:3000/users')
+        .then(response => {
+          this.setState({customer: response.data});
+          console.log('response :', response.data);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log('error: ' + error);
+        });
+    });
+  }
+
+  async componentWillUnmount() {
+    this._unsubscribe();
+    console.log('isi :', this._unsubscribe());
   }
 
   render() {
     const data = this.state.customer;
     const {navigation} = this.props;
-    console.log('isi:' + this.state.customer);
     return (
       <View style={{flex: 1, backgroundColor: '#F1F1F1'}}>
         <TitleNavSum

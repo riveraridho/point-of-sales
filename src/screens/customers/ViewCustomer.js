@@ -16,19 +16,33 @@ import {
 } from 'react-native-paper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import TitleNavEdit from '../../components/TitleNavEdit';
+import axios from 'axios';
 
 class ViewCustomer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullName: '',
-      lastname: '',
-      address: '',
-      city: '',
-      province: '',
-      zipcode: '',
-      telfonnumber: '',
+      customer: {},
     };
+  }
+
+  async componentDidMount() {
+    this._ = this.props.navigation.addListener('focus', async () => {
+      let customer = await axios
+        .get('http://localhost:3000/users', {
+          params: {
+            id: this.props.route.params.id,
+          },
+        })
+        .then(response => {
+          this.setState({customer: response.data[0]});
+          console.log('response : ', response.data[0]);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log('error: ' + error);
+        });
+    });
   }
 
   onSave = () => {
@@ -38,13 +52,23 @@ class ViewCustomer extends Component {
   };
 
   render() {
+    const {navigation} = this.props;
+    console.log(this.state.customer.id);
     return (
       <View style={{flex: 1, backgroundColor: '#F1F1F1'}}>
-        <TitleNavEdit title={this.props.route.name} />
+        <TitleNavEdit
+          title={this.props.route.name}
+          onPress={() =>
+            navigation.navigate('EditCustomer', {
+              id: this.state.customer.id,
+            })
+          }
+        />
         <KeyboardAwareScrollView>
           <TextInput
-            label="Full Name"
-            value={this.state.fullName}
+            label="Name"
+            value={this.state.customer.name}
+            editable={false}
             mode="outlined"
             style={styles.input}
             onChange={event => {
@@ -54,10 +78,25 @@ class ViewCustomer extends Component {
             }}
           />
           <TextInput
-            label="Address"
-            value={this.state.address}
+            label="Telfon Number"
+            value={this.state.customer.telfon_number}
+            editable={false}
             mode="outlined"
             style={styles.input}
+            keyboardType="phone-pad"
+            onChange={event => {
+              this.setState({
+                telfonnumber: event.nativeEvent.text,
+              });
+            }}
+          />
+          <TextInput
+            label="Address"
+            value={this.state.customer.address}
+            mode="outlined"
+            style={styles.inputAdress}
+            editable={false}
+            multiline={true}
             onChange={event => {
               this.setState({
                 address: event.nativeEvent.text,
@@ -65,19 +104,9 @@ class ViewCustomer extends Component {
             }}
           />
           <TextInput
-            label="Province"
-            value={this.state.province}
-            mode="outlined"
-            style={styles.input}
-            onChange={event => {
-              this.setState({
-                province: event.nativeEvent.text,
-              });
-            }}
-          />
-          <TextInput
             label="City"
-            value={this.state.city}
+            value={this.state.customer.city}
+            editable={false}
             mode="outlined"
             style={styles.input}
             onChange={event => {
@@ -88,25 +117,14 @@ class ViewCustomer extends Component {
           />
           <TextInput
             label="Zipcode"
-            value={this.state.zipcode}
+            value={this.state.customer.zipcode}
+            editable={false}
             mode="outlined"
             style={styles.input}
             keyboardType="phone-pad"
             onChange={event => {
               this.setState({
                 zipcode: event.nativeEvent.text,
-              });
-            }}
-          />
-          <TextInput
-            label="Telfon Number"
-            value={this.state.telfonnumber}
-            mode="outlined"
-            style={styles.input}
-            keyboardType="phone-pad"
-            onChange={event => {
-              this.setState({
-                telfonnumber: event.nativeEvent.text,
               });
             }}
           />
@@ -140,6 +158,12 @@ const styles = StyleSheet.create({
   input: {
     marginHorizontal: 10,
     marginTop: 15,
+    backgroundColor: '#FFFFFF',
+  },
+  inputAdress: {
+    marginHorizontal: 10,
+    marginTop: 15,
+    height: 150,
     backgroundColor: '#FFFFFF',
   },
   bottomCenter: {

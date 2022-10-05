@@ -13,29 +13,47 @@ import {
   List,
   TextInput,
   Provider as PaperProvider,
+  Snackbar,
 } from 'react-native-paper';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {connect} from 'react-redux';
 import {setCustomer} from '../../redux/action';
-
+import axios from 'axios';
+import {v4 as uuidv4} from 'uuid';
 class CreateCustomer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullName: '',
-      lastname: '',
+      name: '',
+      telfon_number: '',
       address: '',
       city: '',
-      province: '',
       zipcode: '',
-      telfonnumber: '',
     };
   }
 
-  onSave = () => {
-    const {navigation} = this.props;
-    this.props.dispatchsetCustomer(this.state);
-    navigation.navigate('ListCustomer');
+  onSave = async () => {
+    await axios
+      .post('http://localhost:3000/users', {
+        id: uuidv4(),
+        name: this.state.name,
+        telfon_number: this.state.telfon_number,
+        address: this.state.address,
+        city: this.state.city,
+        zipcode: this.state.zipcode,
+      })
+      .then(response => {
+        console.log('response :', response.data);
+        <Snackbar duration="3000">Data berhasil dibuat</Snackbar>;
+        this.props.navigation.goBack();
+      })
+      .catch(function (error) {
+        // handle error
+        console.log('error: ' + error);
+      });
+    // const {navigation} = this.props;
+    // this.props.dispatchsetCustomer(this.state);
+    // navigation.navigate('ListCustomer');
   };
 
   render() {
@@ -43,13 +61,25 @@ class CreateCustomer extends Component {
       <View style={{flex: 1, backgroundColor: '#F1F1F1'}}>
         <KeyboardAwareScrollView>
           <TextInput
-            label="Full Name"
-            value={this.state.fullName}
+            label="Name"
+            value={this.state.name}
             mode="outlined"
             style={styles.input}
             onChange={event => {
               this.setState({
-                fullName: event.nativeEvent.text,
+                name: event.nativeEvent.text,
+              });
+            }}
+          />
+          <TextInput
+            label="Telfon Number"
+            value={this.state.telfon_number}
+            mode="outlined"
+            style={styles.input}
+            keyboardType="phone-pad"
+            onChange={event => {
+              this.setState({
+                telfon_number: event.nativeEvent.text,
               });
             }}
           />
@@ -57,21 +87,11 @@ class CreateCustomer extends Component {
             label="Address"
             value={this.state.address}
             mode="outlined"
-            style={styles.input}
+            style={styles.inputAdress}
+            multiline={true}
             onChange={event => {
               this.setState({
                 address: event.nativeEvent.text,
-              });
-            }}
-          />
-          <TextInput
-            label="Province"
-            value={this.state.province}
-            mode="outlined"
-            style={styles.input}
-            onChange={event => {
-              this.setState({
-                province: event.nativeEvent.text,
               });
             }}
           />
@@ -95,18 +115,6 @@ class CreateCustomer extends Component {
             onChange={event => {
               this.setState({
                 zipcode: event.nativeEvent.text,
-              });
-            }}
-          />
-          <TextInput
-            label="Telfon Number"
-            value={this.state.telfonnumber}
-            mode="outlined"
-            style={styles.input}
-            keyboardType="phone-pad"
-            onChange={event => {
-              this.setState({
-                telfonnumber: event.nativeEvent.text,
               });
             }}
           />
@@ -176,6 +184,12 @@ const styles = StyleSheet.create({
   input: {
     marginHorizontal: 10,
     marginTop: 15,
+    backgroundColor: '#FFFFFF',
+  },
+  inputAdress: {
+    marginHorizontal: 10,
+    marginTop: 15,
+    height: 150,
     backgroundColor: '#FFFFFF',
   },
   bottomCenter: {

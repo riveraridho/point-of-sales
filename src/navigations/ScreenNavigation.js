@@ -56,7 +56,16 @@ const ScreenNavigation = () => {
             })}
           />
           <Stack.Screen name="CreateCustomer" component={CreateCustomer} />
-          <Stack.Screen name="EditCustomer" component={EditCustomer} />
+          <Stack.Screen
+            name="EditCustomer"
+            component={EditCustomer}
+            options={() => ({
+              title: ' ',
+              headerStyle: {
+                backgroundColor: '#F1F1F1',
+              },
+            })}
+          />
           <Stack.Screen
             name="ListCustomer"
             component={ListCustomer}
